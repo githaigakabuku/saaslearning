@@ -1,0 +1,22 @@
+{
+"name": "saas-node-api",
+"version": "1.0.0",
+"description": "learning saas with node.js",
+"main": "src/index.js",
+
+/**  scripts are shortcut you can run wuth npm tun <script>**/
+"scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"no test yet\" && exit 0 "
+},
+
+"dependencies": {
+
+},
+
+"devDependencies": {
+    "nodemon":"^3.0.0"
+}
+
+}
