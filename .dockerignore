@@ -1,0 +1,36 @@
+# ============================================================================
+# .dockerignore - Files to EXCLUDE from Docker image
+# This makes images smaller and builds faster
+# ============================================================================
+
+# Node.js modules (we'll install fresh in container)
+node_modules
+npm-debug.log
+
+# Environment files (sensitive!)
+.env
+.env.local
+.env.*.local
+
+# Git files
+.git
+.gitignore
+.github/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test and coverage reports
+coverage/
+.nyc_output
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/

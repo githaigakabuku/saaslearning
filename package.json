@@ -4,7 +4,7 @@
 "description": "learning saas with node.js",
 "main": "src/index.js",
 
-/**  scripts are shortcut you can run wuth npm tun <script>**/
+
 "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
