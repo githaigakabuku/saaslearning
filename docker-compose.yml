@@ -1,0 +1,62 @@
+#docker compose run multiple containers together 
+#pertfect for local development with databse ,cache ,etc
+
+#version of docker compose-synax
+
+version: '3.8'
+
+#define services (containers )to run
+
+services:
+    #service 1: oUR Node.js app
+    node-app:
+      build:
+        context: ./node-app #these where the dockerfile is
+        dockerfile: Dockerfile
+      ports:
+      #map host port 3000 to container port 3000
+      # format "HOST_PORT : CONTAINER_PORT"
+      - "3000:3000"
+      environment:
+        #environment variable in hte container
+        -NODE_ENV=development
+        -PORT=3000
+        -DATABASE_URL=postgresql://postgres:postgres@db:5432/saas_dev
+      volumes:
+        #mount local code into the container for live relaod
+        #format "LOCAL_PATH:CONTAINER_PATH"
+        - ./node-app:/app
+        #ignore node_modules in container (user container versions)
+        - /app/node_modules
+
+      depend_on:
+      #wait fir db service rto be ready
+      - db
+
+  #service 2 the db
+    db:
+      image: postgres:15-apline # use version 15  
+      environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=${USER}
+          - POSTGRES_DB=saas_dev
+
+      port:
+      #EXPOSE POSTGRES IN PORT 5432
+      - "5432:5432"
+      volumes:
+      #PERSIST databse b2n contaiiner restart
+      - postgres_data:/var/lib/postgresql/databse
+
+  #service 3 redis cache common in saas
+    redis:
+      image: redis:7-apline
+      port:
+      - "6379:6379"
+      volumes:
+      - redis_data:/databse
+
+volumes: 
+  postgres_data:
+  redis_data:
+         
